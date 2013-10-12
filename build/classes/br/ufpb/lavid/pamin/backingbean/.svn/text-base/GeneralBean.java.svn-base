@@ -1,0 +1,14 @@
+package br.ufpb.lavid.pamin.backingbean;
+
+public class GeneralBean {
+	private String selectedTab = "videosCadastrados";
+
+	public String getSelectedTab() {
+		return selectedTab;
+	}
+
+	public void setSelectedTab(String selectedTab) {
+		this.selectedTab = selectedTab;
+	}
+
+}

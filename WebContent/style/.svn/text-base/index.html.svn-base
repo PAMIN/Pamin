@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>- Projeto EduLivre - Index -</title>
+
+<!-- Arquivo Css, Javascript -->
+
+<style type="text/css" media="all">
+	@import url( ripe.css );
+	@import url( thickbox.css );
+</style>
+<!-- Javascript do Thickbox -->
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="thickbox-compressed.js"></script>
+
+<script language="javascript" src=""> </script>
+
+<!-- Fim dos arquivos -->
+</head>
+
+<body>
+
+<!-- Inicio da div global -->
+<div class="global_superior">
+
+<!-- Inicio da div top  -->
+<div class="topo">
+
+<!-- Inicio da div logo  -->
+<div class="logo">
+<img src="Imagens/logo1.png" alt="Logotipo RIPE" />
+</div>
+<!-- Fim da div logo -->
+
+<!-- Inicio da div login  -->
+<div class="login">
+
+<!-- Inicio da div login_superior  -->
+<div class="login_superior"></div>
+<!-- Fim da div login_superior -->
+
+<!-- Inicio da div pesquisa  -->
+<div class="pesquisa"></div>
+<!-- Fim da div pesquisa -->
+
+</div>
+<!-- Fim da div login -->
+
+</div>
+<!-- Fim da div topo -->
+
+<!-- Inicio da div menu_horizontal  -->
+<div class="menu_horizontal">
+
+<!-- Inicio da div menu_horizontal_documentario  -->
+<div class="menu_horizontal_documentario" align="center" >
+
+<a href="x"> Documentário </a>
+
+</div>
+<!-- Fim da div menu_horizontal_documentario -->
+
+<!-- Inicio da div menu_horizontal_noticias  -->
+<div class="menu_horizontal_noticias" align="center">
+
+<a href="x"> Notícias </a>
+
+</div>
+<!-- Fim da div menu_horizontal_noticias -->
+
+<!-- Inicio da div menu_horizontal_musica  -->
+<div class="menu_horizontal_musica" align="center">
+
+<a href="x"> Música </a>
+
+</div>
+<!-- Fim da div menu_horizontal_musica -->
+
+<!-- Inicio da div menu_horizontal_video  -->
+<div class="menu_horizontal_video" align="center">
+
+<a href="x"> Vídeo </a>
+
+</div>
+<!-- Fim da div menu_horizontal_video -->
+
+<!-- Inicio da div menu_horizontal_series  -->
+<div class="menu_horizontal_series" align="center">
+
+<a href="x"> Series </a>
+
+</div>
+<!-- Fim da div menu_horizontal_series -->
+
+<!-- Inicio da div menu_horizontal_outros  -->
+<div class="menu_horizontal_outros" align="center">
+
+<a href="x"> Outros </a>
+
+</div>
+<!-- Fim da div menu_horizontal_outros -->
+
+<!-- Inicio da div menu_horizontal_top50  -->
+<div class="menu_horizontal_top50" align="center">
+<a href="x"> Top50 </a>
+</div>
+<!-- Fim da div menu_horizontal_top50 -->
+
+<!-- Inicio da div menu_horizontal_upload  -->
+<div class="menu_horizontal_upload" align="center">
+<a class="thickbox" href="upload.html?KeepThis=true&TB_iframe=true&height=500&width=740"> Upload </a>
+
+</div>
+
+<!-- Fim da div menu_horizontal_upload -->
+</div>
+<!-- Fim da div menu_horizontal -->
+
+<!-- Inicio da div banner  -->
+<div class="banner">
+
+<!-- Inicio da div player  -->
+<div class="player"></div>
+<!-- Fim da div player -->
+
+<!-- Inicio da div watched_now  -->
+<div class="watched_now">
+
+<!-- Inicio da div watched_titulo  -->
+<div class="watched_titulo"> Itens Relacionados
+</div>
+<!-- Fim da div watched_titulo -->
+
+<!-- Inicio da div watched_conteudo  -->
+<div class="watched_conteudo"> Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+  Conteudo <br />
+ 
+</div>
+<!-- Fim da div watched_conteudo -->
+</div>
+<!-- Fim da div watched_now -->
+
+</div>
+<!-- Fim da div banner -->
+
+</div>
+<!-- Fim da div Global Superior -->
+
+<!-- Inicio da div conteudo  -->
+<div class="global_inferior">
+
+<!-- Inicio da div conteudo  -->
+<div class="conteudo">
+aaa
+</div>
+<!-- Fim da div conteudo -->
+
+<!-- Inicio da div bg_glob_inferior  -->
+<div class="bg_glob_inferior">
+
+</div>
+<!-- Fim da div bg_glob_inferior -->
+
+</div>
+<!-- Fim da div global_inferior -->
+
+<!-- Inicio da div rodape  -->
+<div class="rodape">
+
+<!-- Inicio da div rodape_nome  -->
+<div class="rodape_nome">
+
+</div>
+<!-- Fim da div rodape_nome -->
+
+</div>
+<!-- Fim da div rodape -->
+
+</body>
+</html>

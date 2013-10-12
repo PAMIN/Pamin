@@ -1,0 +1,69 @@
+/* T�TULOS */
+/* BOT�ES */
+/* DEFINI��ES GERAIS */
+
+div#colUnica{
+	width:821px;
+	margin-left:30px;
+	float:left;
+	text-align:left;
+	}
+	
+div#quest{
+	width:730px;
+	margin-left:110px;
+	float:left;
+	text-align:left;
+	}
+
+div#colEsq {
+	width:461px;
+	min-height:200px;
+	margin-left:30px;
+	float:left;
+	text-align:left;
+	}
+div#colDir {
+	width:330px;
+	min-height:200px;
+	margin-left:30px;
+	float:left;
+	text-align:left;
+	}
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+/* VIDEOS */
+div#boxVideo, div#boxJogos {
+	width:461px;
+	height:339px;
+	clear:left;
+	z-index:2;
+	position:absolute;
+	}
+	
+div#boxVideo { background:url(../imagens/internas/bg_videos.png) no-repeat top; }
+div#boxJogos { background:url(../imagens/internas/bg_jogos.png) no-repeat top; }
+
+div#boxIMG {
+	width:461px;
+	height:339px;
+	}
+div#detalhe_video, .commentario_post{width:440px; margin-left:10px; margin-bottom:10px;}
+
+
+ dl { height:80px; margin-bottom:10px; padding-bottom:5px; border-bottom:1px dashed #F60; }
+ dl dt.video_img{ width:101px; padding:3px; margin-right:10px; float:left; border:1px solid #a8d5fc; }
+ dl dd{padding-bottom:5px; text-align:justify;}
+
+#player {margin-bottom:10px;}
+.dlMusica {height:30px;}
+
+.paginacao li {display:inline-block;}
+.paginacao li a {padding:5px;}
+.paginacao li a:hover {color:#F90;}
+.paginacao li .number:hover {color:#fff; background:#F90; }
+
+/* TEXTOS */
+.img_textos {margin:0 10px 0 0; float:left;}
+
+/* CONTATO */

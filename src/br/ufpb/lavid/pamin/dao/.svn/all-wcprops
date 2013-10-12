@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/!svn/ver/14356/pamin/trunk/Pamin/src/br/ufpb/lavid/pamin/dao
+END
+GenericDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/!svn/ver/14356/pamin/trunk/Pamin/src/br/ufpb/lavid/pamin/dao/GenericDAO.java
+END
+ManagedEMContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/!svn/ver/14356/pamin/trunk/Pamin/src/br/ufpb/lavid/pamin/dao/ManagedEMContext.java
+END
+IGenericDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/!svn/ver/14356/pamin/trunk/Pamin/src/br/ufpb/lavid/pamin/dao/IGenericDAO.java
+END
+UsuarioDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/!svn/ver/14356/pamin/trunk/Pamin/src/br/ufpb/lavid/pamin/dao/UsuarioDAO.java
+END
+PersistenceUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/!svn/ver/14356/pamin/trunk/Pamin/src/br/ufpb/lavid/pamin/dao/PersistenceUtil.java
+END

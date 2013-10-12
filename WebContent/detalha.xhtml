@@ -1,0 +1,81 @@
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">
+	  <title>Detalhe de evento</title>
+	  <style>
+	    .ui-panel-titlebar{
+	       background-color:#036;
+	    }
+	    .ui-panel-titlebar{
+	       color:white;
+	       font-size:16px;
+	    }
+	    
+	  </style>
+	  <script>
+	    "#{eventoBean.buscaEventoDetalhe()}"
+	  </script>
+	</ui:define>
+	
+	<ui:define name="metadata">
+	   <f:metadata>
+	     <f:viewParam name="id" value="#{eventoBean.idEvento}" />
+	   </f:metadata>
+	   
+	</ui:define>
+	
+	<ui:define name="conteudo">
+	   <center>
+		 <div id="container" style="height:650px;width:650px;">
+           <p:panel header="Detalhes do evento" style="font-size:10px;height:620px;width:650px;" >
+           		
+           		<p:outputLabel value="#{eventoBean.eventoDetalhe.nomeEvento}" style="font-size:300%;
+			 			font-family:Arial;font-style: bold;color:#172d56;margin-top:0px;margin-left:0%"/>
+			 			<br/><br/>
+			 	<p:outputLabel value="Postado por: #{eventoBean.eventoDetalhe.nomeUsuario}" style="font-size:120%;
+			 			font-family:Arial;font-style: bold;color:#172d56;margin-top:0px;margin-left:0%"/>
+			 			<br/><br/>
+			 	<p:outputLabel value="Data de Início: #{eventoBean.eventoDetalhe.dteventoini}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+			 			<br/><br/>
+           		<p:outputLabel value="Data Final: #{eventoBean.eventoDetalhe.dteventofim}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+                <p:outputLabel value="Hora: #{eventoBean.eventoDetalhe.hora}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+               	 <p:outputLabel value="Preço: #{eventoBean.eventoDetalhe.preco}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+                <p:outputLabel value="Endereço: #{eventoBean.eventoDetalhe.logradouro}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+               	<p:outputLabel value="Bairro: #{eventoBean.eventoDetalhe.bairro}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+               	<p:outputLabel value="Cidade: #{eventoBean.eventoDetalhe.cidade}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/><br/><br/><br/>
+               	<p:outputLabel value="Descrição do Evento:" style="font-size:250%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+               	<p:outputLabel value="#{eventoBean.eventoDetalhe.descricao}" style="font-size:200%;
+			 			font-family:Arial;font-style: bold;color:#172d56;" />
+               			<br/><br/>
+		
+           </p:panel>
+		 </div>
+	   </center>
+	</ui:define>
+	
+</ui:composition>
+		
+	
+	

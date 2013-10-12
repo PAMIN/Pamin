@@ -1,0 +1,25 @@
+/* Titulos */
+
+h1, h2, h3{font-weight:normal; font-family:Arial, Helvetica, sans-serif; color:#3c3c3c;}
+h1{ font-size:20px; margin-bottom:10px;}
+h2{ font-size:17px;}
+h3{ font-size:12px;}
+
+.h1_titulo {
+	width:200px;
+	height:80px;
+	margin-top:-50px;
+	position:absolute; 
+	z-index:3; 
+	text-indent:-5000px
+	}
+#h1_projetos{ background:url(../imagens/titulos/h1_projetos.png) no-repeat; }
+#h1_textos{ background:url(../imagens/titulos/h1_textos.png) no-repeat; }
+#h1_video{ background:url(../imagens/titulos/h1_videos.png) no-repeat; }
+#h1_livros{ background:url(../imagens/titulos/h1_livros.png) no-repeat; }
+
+#h1_desenhos{ background:url(../imagens/titulos/h1_jogos.png) no-repeat; }
+#h1_sites{ background:url(../imagens/titulos/h1_sites.png) no-repeat; }
+#h1_musicas{ background:url(../imagens/titulos/h1_musicas.png) no-repeat; }
+#h1_jogos{ background:url(../imagens/titulos/h1_jogos.png) no-repeat; }
+#h1_albuns{ background:url(../imagens/titulos/h1_albuns.png) no-repeat; }

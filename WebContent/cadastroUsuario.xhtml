@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>  
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" >
+    
+    <ui:define name="titulo">
+       <title>Cadastro</title>
+	   <script type="text/javascript" src="js/validaCadastroUsuario.js" charset="ISO-8859-1"/>
+    </ui:define>
+    
+    <ui:define name="conteudo">
+      <div id="box" style="margin-left:30%;width:33%;height:100%;">
+      
+       <h:form name="formulario" id="formulario" acceptcharset="ISO-8859-1">
+       		<br/>
+		 	<h:graphicImage url="imagens/cadastroUsuario.png" style="margin-left:5%; width:90%;"/>
+		 	<br/><br/>
+		 		<p:panel style="font-size:14px;">
+					
+					 <h:panelGrid columns="2">
+						 
+						 <h:panelGroup>
+						 	Nome<br/>
+						 	<h:inputText id="nome" value="#{cadastroUsuarioBean.novoUsuario.nome}" required="true" requiredMessage="Campo Obrigatorio" size="30"/>
+						 </h:panelGroup>
+						 <h:message for="nome" style = " font-size:55% ; color:red " />
+						 
+						 
+						 <h:panelGroup>
+						 	Login<br/>
+						 	<h:inputText id="login" value="#{cadastroUsuarioBean.novoUsuario.login}" required="true" requiredMessage="Campo Obrigatorio" size="30"/>
+						 </h:panelGroup>
+						 <h:message for="login" style = " font-size:55% ; color:red " />
+			
+						 
+						 <h:panelGroup>
+						 	Email<br/>
+						 	<h:inputText id="email" value="#{cadastroUsuarioBean.novoUsuario.email}" required="true" requiredMessage="Campo Obrigatorio" size="30"/> 
+						 </h:panelGroup>
+						 <h:message for="email" style = " font-size:55% ; color:red " />
+						 
+						 
+						 <h:panelGroup>
+						 	Senha:<br/>
+						 	<h:inputSecret  id="senha" value="#{cadastroUsuarioBean.novoUsuario.senha}" required="true" requiredMessage="Campo Obrigatorio" size="30" /> 
+						 </h:panelGroup>
+						 <h:message for="senha" style = "font-size:55% ; color:red "  />
+						 
+						 
+						 <h:panelGroup>
+						 	Confirmar Senha<br/>
+						 	<h:inputSecret id="senha2" required="true" requiredMessage="Campo Obrigatorio" size="30" />
+						</h:panelGroup>
+						<h:message for="senha2" style = " font-size:55% ; color:red " />
+						
+						
+					</h:panelGrid>
+				  </p:panel>
+				
+				
+				<p:panel style="font-size:14px;">
+					<h:commandLink action="#{cadastroUsuarioBean.cadastrarUsuario()}" onclick="validaForm();">
+						<h:graphicImage url="imagens/cadastrar2.png" style="width:23%;"/>
+					</h:commandLink>
+					
+					<h:outputLink value="principal.jsf">
+						<h:graphicImage url="imagens/cancelar.png" style="width:23%;"/>
+					</h:outputLink>
+					
+			 	</p:panel>
+		 </h:form>
+		 
+		 
+      </div>
+    </ui:define>
+    
+</ui:composition>    

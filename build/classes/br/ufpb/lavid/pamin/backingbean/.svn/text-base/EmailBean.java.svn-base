@@ -1,0 +1,58 @@
+package br.ufpb.lavid.pamin.backingbean;
+
+  
+import org.apache.commons.mail.SimpleEmail;  
+
+public class EmailBean {
+	
+	private String nome;
+	private String contato;
+	private String mensagem;
+	
+	public String getNome(){
+		return nome;
+	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	public String getContato(){
+		return contato;
+	}
+	
+	public void setContato(String contato){
+		this.contato = contato;
+	}
+	
+	public String getMensagem(){
+		return mensagem;
+	}
+	
+	public void setMensagem(String mensagem){
+		this.mensagem = mensagem;
+	}
+	
+public String metot() throws Exception{
+	
+		SimpleEmail email = new SimpleEmail();  
+  
+        try {  
+        email.setDebug(true);  
+        email.setHostName("smtp.gmail.com");  
+        email.setAuthentication("patrimoniopamin","i'dliketoknow");  
+        email.setSSL(true);  
+        email.addTo("patrimoniopamin@gmail.com"); //pode ser qualquer um email  
+        email.setFrom("patrimoniopamin@gmail.com"); //aqui necessita ser o email que voce fara a autenticacao  
+        email.setSubject("[PAMIN]: Fale Conosco");  
+        email.setMsg("From: " + getContato() + " \n\nNome: " + getNome() + "\n\nMensagem: " + getMensagem());  
+        email.send();  
+  
+        } catch (Exception e) {  
+  
+        System.out.println(e.getMessage());  
+  
+        }  
+        return "Enviar";
+    }  
+}

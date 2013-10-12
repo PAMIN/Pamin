@@ -1,0 +1,272 @@
+
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Cadastro de Eventos</title>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"/>
+		<script type="text/javascript">
+// 		  <![CDATA[
+			var currentMarker = null;
+
+			function handlePointClick(event) {
+				if (currentMarker === null) {
+
+					currentMarker = new google.maps.Marker({
+						position : new google.maps.LatLng(event.latLng.lat(),
+								event.latLng.lng())
+					});
+
+					map.addOverlay(currentMarker);
+					
+					getAddress(event.latLng); //localiza o endereço
+
+				} else {
+					
+					currentMarker.setMap(null);
+					
+					currentMarker = new google.maps.Marker({
+						position : new google.maps.LatLng(event.latLng.lat(),
+								event.latLng.lng())
+					});
+
+					map.addOverlay(currentMarker);
+					
+					getAddress(event.latLng); //localiza o endereço
+					
+				}
+			}
+			
+			var geocoder;
+			geocoder = new google.maps.Geocoder();
+			
+			function getAddress(latLng) {
+		         geocoder.geocode( {'latLng': latLng},
+		         function(results, status) {
+		           if(status == google.maps.GeocoderStatus.OK) {
+		             if(results[0]) { //Verifica se o geocoder foi realizado com sucesso
+		            	var endereco = results[0].address_components; //pega todo o endereço
+	
+						document.getElementById("form:end").value = endereco[1].short_name;
+						document.getElementById("form:bairro").value = endereco[2].short_name;	
+						document.getElementById("form:cidade").value = endereco[3].short_name;
+						document.getElementById("form:estado").value = endereco[4].short_name;
+		            }
+		            else {
+		                alert('Erro ao realizar a codificação geográfica do local');
+		            }
+		          }
+		        });
+		    }
+			
+			function objToString (obj) {
+			    var str = '';
+			    for (var p in obj) {
+			        if (obj.hasOwnProperty(p)) {
+			            str += obj[p];
+			        }
+			    }
+			    return str;
+			}
+			
+// 		 ]]>
+		</script>
+		
+		<style>
+		  #container{
+		     width:700px;
+		  }
+		  #tipoEvento{
+		     font-size:15px;
+		     text-align:center;
+		     margin-left:-12px;
+		  }
+		  .ui-dialog-titlebar-close{
+		    background-color:white;
+		  }
+		  .ui-dialog-titlebar{
+		    background-color:#036;
+		  }
+		  
+		  .ui-datepicker{
+		    font-size:14px;
+		    
+		  }
+		  
+		  .ui-datepicker-title{
+		    background-color:#036;
+		    font-size:14px;
+		    color:white;
+		  }
+		  .ui-datepicker-title{
+		    background-color:#036;
+		    font-size:14px;
+		    color:white;
+		  }
+		  .ui-datepicker td{
+		    font-size:14px;
+		  } 
+		  
+		</style>
+		
+	</ui:define>
+
+	<ui:define name="conteudo">
+	    <center>
+		<div id="container" style="font-size:14px;">
+			<h:graphicImage style="margin-left:0%;" url="/imagens/detalhe_lightbox2.png"></h:graphicImage>
+		    <p:panel style="margin-left:0.2%;" id="tipoEvento">*Tipo de Evento:</p:panel>
+
+		    <h:form acceptcharset="ISO-8859-1">
+		     <p:panel>
+		      <p:outputPanel id="customPanel">
+		        <p:selectOneRadio id="tipos" value="#{cadastroEventoBean.evento.idAtracao}"  layout="custom"
+		           style="font-size:100%;color:#172d56;font-family:Arial Normal">
+		          <f:ajax event="click" />
+		          <f:selectItem itemLabel="Artes Plásticas" itemValue="1" />
+				  <f:selectItem itemLabel="Danças" itemValue="2" />
+				  <f:selectItem itemLabel="Música" itemValue="3" />
+				  <f:selectItem itemLabel="Literatura" itemValue="4" />
+				  <f:selectItem itemLabel="Vídeo e Fotografia" itemValue="5" />
+				  <f:selectItem itemLabel="Cênicas Circenses" itemValue="6" />
+				  <f:selectItem itemLabel="Esportes Jogos" itemValue="7" />
+				  <f:selectItem itemLabel="Infantis" itemValue="8" />
+				  <f:selectItem itemLabel="Celebrações Religiosas" itemValue="9" />
+				  <f:selectItem itemLabel="Oficinas, Palestras e Afins" itemValue="10" />
+				  <f:selectItem itemLabel="Festivais e Multiartísticos" itemValue="11" />
+				  <f:selectItem itemLabel="Outros" itemValue="12" />
+		        </p:selectOneRadio>
+
+		        <h:panelGrid columns="9">
+		          <p:radioButton id="opt1" for="tipos" itemIndex="0" />
+		          <h:graphicImage value="/imagens/artesplasticasEDT.png" />
+		          <h:outputLabel for="opt1" value="Artes Plásticas" />
+		          
+		          <p:radioButton id="opt2" for="tipos" itemIndex="1" />
+		          <h:graphicImage value="/imagens/dancasEDT.png" />
+		          <h:outputLabel for="opt2" value="Danças" />
+		          
+		          <p:radioButton id="opt3" for="tipos" itemIndex="2" />
+		          <h:graphicImage value="/imagens/musicaEDT.png" />
+		          <h:outputLabel for="opt3" value="Música" />
+		          
+		          <p:radioButton id="opt4" for="tipos" itemIndex="3" />
+		          <h:graphicImage value="/imagens/literaturaEDT.png" />
+		          <h:outputLabel for="opt4" value="Literatura" />
+		          
+		          <p:radioButton id="opt5" for="tipos" itemIndex="4" />
+		          <h:graphicImage value="/imagens/cinemaEDT.png" />
+		          <h:outputLabel for="opt5" value="Vídeo e Fotografia" />
+		          
+		          <p:radioButton id="opt6" for="tipos" itemIndex="5" />
+		          <h:graphicImage value="/imagens/cenicasEDT.png" />
+		          <h:outputLabel for="opt6" value="Cênicas Circenses" />
+		        
+		          <p:radioButton id="opt7" for="tipos" itemIndex="6" />
+		          <h:graphicImage value="/imagens/esporterEDT.png" />
+		          <h:outputLabel for="opt7" value="Esportes e Jogos" />
+		          
+		          <p:radioButton id="opt8" for="tipos" itemIndex="7" />
+		          <h:graphicImage value="/imagens/infantilEDT.png" />
+		          <h:outputLabel for="opt8" value="Infantis" />
+		          
+		          <p:radioButton id="opt9" for="tipos" itemIndex="8" />
+		          <h:graphicImage value="/imagens/religiosoEDT.png" />
+		          <h:outputLabel for="opt9" value="Celebrações Religiosas" />
+		          
+		          <p:radioButton id="opt10" for="tipos" itemIndex="9" />
+		          <h:graphicImage value="/imagens/palestrasEDT.png" />
+		          <h:outputLabel for="opt10" value="Oficionas, Palestras e Afins" />
+		          
+		          <p:radioButton id="opt11" for="tipos" itemIndex="10" />
+		          <h:graphicImage value="/imagens/festivaisEDT.png" />
+		          <h:outputLabel for="opt11" value="Festivais e Multiartísticos" />
+		          
+		          <p:radioButton id="opt12" for="tipos" itemIndex="11" />
+		          <h:graphicImage value="/imagens/outrosEDT.png" />
+		          <h:outputLabel for="opt12" value="Outros" />
+		        </h:panelGrid>
+		      </p:outputPanel>
+		     </p:panel> 
+		    </h:form>
+		    
+		    <h:form id="form" acceptcharset="ISO-8859-1">
+		     <p:panel> 
+		      <h:panelGrid columns="4">
+		        <h:outputText value="*Título do Evento:"/>
+		        <p:inputText id="nomeEvento" value="#{cadastroEventoBean.evento.nomeEvento}" style="width:170px;" required="true" requiredMessage="Obrigatório digitar titulo do evento" />
+		        <h:outputText style="margin-left:20px;" value="*Local do Evento:"/>
+		        <p:inputText id="localEvento" value="#{cadastroEventoBean.evento.local}" style="margin-left:0%;width:170px;" required="true" requiredMessage="Obrigatório digitar local do evento" />
+		      </h:panelGrid>
+		      
+              <br/>
+             
+              <p:accordionPanel style="width:500px;" activeIndex="2"> 
+               <p:tab style="width:500px;" title="Selecione no mapa a localização do evento">  
+                 <h:panelGrid>
+                  <p:gmap id="gmap" update="panelGrid" center="-7.11532,-34.861051" zoom="14" type="hybrid" 
+                     style="margin-left:-7%;width:500px;height:400px;" model="#{mapBean.model}" 
+                     onPointClick="handlePointClick(event);" widgetVar="map" />
+                 </h:panelGrid>
+               </p:tab>
+			  </p:accordionPanel>
+			  
+			  <br/>
+		     
+		      <h:panelGrid id="panelGrid" style="" columns="2">
+		        <h:outputText value="*Endereço:"/>
+		        <p:inputText id="end" value="#{cadastroEventoBean.evento.logradouro}" style="width:190px;" required="true" requiredMessage="É obrigatório entrar com o endereço"/>
+		        <h:outputText value="*Bairro:"/>
+		        <p:inputText id="bairro" value="#{cadastroEventoBean.evento.bairro}" style="width:190px;" required="true" requiredMessage="É obrigatório entrar com o bairro"/>
+		        <h:outputText value="*Cidade:"/>
+		        <p:inputText id="cidade" value="#{cadastroEventoBean.evento.cidade}" style="width:190px;" required="true" requiredMessage="É obrigatório entrar com a cidade"/>
+		        <h:outputText value="*Estado:"/>
+		        <p:inputText id="estado" value="#{cadastroEventoBean.evento.estado}" style="width:190px;" required="true" requiredMessage="É obrigatório entrar com o estado"/>
+		      
+		        <h:outputText value="*Data de início:"/>
+		        <p:calendar pattern="dd/MM/yyyy" id="dataInicio" value="#{cadastroEventoBean.dteventoiniaux}" style="width:150px;" required="true" requiredMessage="Não foi digitado a data de inicio de evento!"/>
+		        <h:outputText value="*Data final:"/>
+		        <p:calendar pattern="dd/MM/yyyy" id="dataFim" value="#{cadastroEventoBean.dteventofimaux}" style="width:150px;" required="true" requiredMessage="Não foi digitado a data de termino de evento!"/>
+		      
+		        <h:outputText value="*Valor:"/>
+		        <p:inputText id="preco" value="#{cadastroEventoBean.evento.preco}" style="width:190px;" required="true" requiredMessage="Não foi digitado preço ou foi digitado errado"/>
+		        <h:outputText value="*Hora:"/>
+		        <p:inputMask id="hora" value="#{cadastroEventoBean.evento.hora}" style="width:190px;" required="true" requiredMessage="Não foi digitado a hora corretamente!" mask="99:99"/>
+                 		      
+		        <h:outputLabel >Descrição do evento:</h:outputLabel>	
+		        <p:inputTextarea id="descricao"  value="#{cadastroEventoBean.evento.descricao}"></p:inputTextarea>
+		      
+		      
+		        <h:outputLabel>Promotor do evento:</h:outputLabel>	
+		        <p:inputText value="#{cadastroEventoBean.evento.promotorevento}" style="width:190px;"/>
+		        
+		        <h:outputLabel>Contato promotor:</h:outputLabel>	
+		        <p:inputText value="#{cadastroEventoBean.evento.contatopromotor}" style="width:190px;"/>
+		        
+		        <h:outputLabel>tag:</h:outputLabel>	
+		        <p:inputText value="#{cadastroEventoBean.evento.tag}" style="width:190px;"/>
+		      
+		        <h:outputLabel >Observações:</h:outputLabel>	
+		        <p:inputTextarea id="obs" value="#{cadastroEventoBean.evento.observacao}"></p:inputTextarea>
+		      </h:panelGrid>
+		        
+		      <br/>
+		      <p:growl id="growl" showDetail="false" sticky="true" />  
+		      <ui:param name="idUser" value="#{usuarioBean.usuario.idUsuario}" />
+		      <h:commandButton id="cadastro" style="padding:10px;margin-left:17%;" 
+		         action="#{cadastroEventoBean.cadastrarEvento(idUser)}" image="/imagens/cadastrar.png" update="growl" />
+									
+		     </p:panel>
+		    </h:form>
+		</div>
+		</center>
+	</ui:define>
+</ui:composition>    

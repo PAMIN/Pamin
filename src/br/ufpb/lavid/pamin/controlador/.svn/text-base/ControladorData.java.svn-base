@@ -1,0 +1,27 @@
+package br.ufpb.lavid.pamin.controladores;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class ControladorData {
+
+	
+	@SuppressWarnings("static-access")
+	public static int anoCorrente(){
+		GregorianCalendar hoje = new GregorianCalendar();
+		hoje.setTime(new Date());
+		return hoje.get(hoje.YEAR); 
+	}
+	
+	@SuppressWarnings("static-access")
+	public static String dataAutal(){
+		
+		GregorianCalendar hoje = new GregorianCalendar();
+		hoje.setTime(new Date());
+		return Integer.toString(hoje.get(hoje.DAY_OF_MONTH)+1)+"-"+Integer.toString(hoje.get(hoje.MONTH))+"-"+Integer.toString(hoje.get(hoje.YEAR));
+		
+		
+	} 
+
+	
+}

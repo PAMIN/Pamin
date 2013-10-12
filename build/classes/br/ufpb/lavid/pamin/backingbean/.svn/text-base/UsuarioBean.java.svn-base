@@ -1,0 +1,306 @@
+package br.ufpb.lavid.pamin.backingbean;
+
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.swing.JOptionPane;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.myfaces.custom.fileupload.UploadedFile;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.validator.NotEmpty;
+import org.hibernate.validator.NotNull;
+
+import controladores.ControladorEvento;
+import controladores.ControladorUsuario;
+
+import modelos.Evento;
+import modelos.Lugar;
+import modelos.Usuario;
+
+public class UsuarioBean{
+
+	@NotEmpty
+	@NotFound
+	private String login;
+	@NotEmpty
+	@NotNull
+	private String senha;
+	
+	private Evento event = new Evento();
+	private Lugar lugar = new Lugar();
+	private Usuario user;
+	private String eventoId;
+	private String nome;
+	private String email;
+	private String mensagem;
+	private boolean erroMensagem=false;
+	private UploadedFile uploadedFile;
+    private String fileName;
+    private int flag = 0;
+    
+	public UploadedFile getUploadedFile() {
+		return uploadedFile;
+	}
+
+	public void setUploadedFile(UploadedFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
+	}
+
+	public UsuarioBean() {
+		// realizarLogin();
+	}
+
+	public Usuario getUser() {
+		return this.user;
+	}
+
+	public Usuario setUser(Usuario user) {
+		return this.user = user;
+	}
+
+	public String sairLogout() {
+		this.user = null;
+		return "Sair";
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setFlag(int controle){
+        flag = controle;
+	}
+
+	public int getFlag(){
+        return flag;
+	}
+
+	public String gravar() {
+		ControladorUsuario c = new ControladorUsuario(); 
+		int flag = c.cadastraUsuario(this.nome, this.login,
+				this.email, this.senha);
+		System.out.println(flag);
+		return "Cadastrar";
+	}
+
+	public String gravarEvento() {
+		System.out.println(event.getNomeEvento());
+		System.out.println(lugar.getBairro());
+		System.out.println(lugar.getCidade());
+		System.out.println(event.getDescricao());
+		System.out.println(event.getDteventoini());
+		System.out.println(event.getDteventofim());
+		
+		String nomeAnexo = "";
+		if(uploadedFile != null){
+			nomeAnexo = submit();
+			setFlag(1);
+		}else{
+			setFlag(0);
+		}
+		
+		System.out.println(eventoId);
+		ControladorEvento cadastro = new ControladorEvento();
+		
+		int flag = cadastro.cadastraEventos(user.getIdUsuario()+"",
+				event.getNomeEvento(), event.getDteventoini(), event.getDteventofim(),
+				event.getDescricao(), event.getHora(), event.getPreco(), 
+				lugar.getLogradouro(), lugar.getBairro(), lugar.getCidade(),
+				"Paraíba", eventoId, event.getFkregularidade()+"", event.getPromotorevento(),
+				event.getContatopromotor(), event.getObservacao(), event.getTag(), nomeAnexo, lugar.getLocal());
+		System.out.println(flag);
+		
+		if(flag == 1)
+			return "sucessoCadastra";
+		else
+			return "erroCadastra";
+	}
+	
+	//recebe a String de todo o endereço e quebra em um array na sequencia rua, bairro, cidade
+    public String[] endereco(String end){
+            
+            String array[] = new String[3];  
+            String[] rua = end.split(Pattern.quote(" - "));
+            array[0] = rua[0];   //rua
+            
+            String[] bairro = rua[1].split(Pattern.quote(","));  //bairro
+            array[1] = bairro[0];
+            
+            String cidade = bairro[1];  //cidade
+            array[2] = cidade;
+            
+            return array;
+            
+    }
+	 
+
+	public Evento getEvent() {
+		return event;
+	}
+
+	public void setEvent(Evento event) {
+		this.event = event;
+	}
+
+	public Lugar getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
+
+	public String log() {
+
+		System.out.println(login);
+		System.out.println(senha);
+		ControladorUsuario cont = new ControladorUsuario();
+		this.user = cont.login(this.login, this.senha);
+		
+		if(this.user == null){
+			setMensagem("Usuário ou senha inválidos.");
+			setErroMensagem(true);
+			return "loginErro";
+		}
+		
+		System.out.println(this.user);
+		return "loginSucesso";
+	}
+
+	public String getEventoId() {
+		return eventoId;
+	}
+
+	public void setEventoId(String eventoId) {
+		this.eventoId = eventoId;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+
+	public boolean isErroMensagem() {
+		return erroMensagem;
+	}
+
+	public void setErroMensagem(boolean erroMensagem) {
+		this.erroMensagem = erroMensagem;
+	}
+	
+	public String submit() {
+
+        // Just to demonstrate what information you can get from the uploaded file.
+        System.out.println("File type: " + uploadedFile.getContentType());
+        System.out.println("File name: " + uploadedFile.getName());
+        System.out.println("File size: " + uploadedFile.getSize() + " bytes");
+
+        // Prepare filename prefix and suffix for an unique filename in upload folder.
+        String prefix = FilenameUtils.getBaseName(uploadedFile.getName());
+        String suffix = FilenameUtils.getExtension(uploadedFile.getName());
+       
+        
+        // Prepare file and outputstream.
+        File file = null;
+        OutputStream output = null;
+        
+        try {
+            // Create file with unique name in upload folder and write to it.
+            
+            file = File.createTempFile(prefix + "_","." + suffix, new File("/home/kaio/Anexo"));
+            output = new FileOutputStream(file);
+            IOUtils.copy(uploadedFile.getInputStream(), output);
+            setFileName(file.getName());
+
+            // Show succes message.
+            FacesContext.getCurrentInstance().addMessage("uploadForm", new FacesMessage(
+                FacesMessage.SEVERITY_INFO, "File upload succeed!", null));
+        } catch (IOException e) {
+            // Cleanup.
+            if (file != null) file.delete();
+
+            // Show error message.
+            FacesContext.getCurrentInstance().addMessage("uploadForm", new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "File upload failed with I/O error.", null));
+
+            // Always log stacktraces (with a real logger).
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(output);
+            return file.getName();
+        }
+    }
+	
+	public ArrayList buscarArquivoPorNome(String palavra, String caminhoInicial){  
+	    ArrayList lista = new ArrayList();  
+	    try{  
+	        File arquivo = new File(caminhoInicial);  
+	        lista =  buscar(arquivo, palavra, lista);          
+	    } catch (Exception e) {  
+	        JOptionPane.showMessageDialog(null, "Caminho Inválido");  
+	    }  
+	    return lista;  
+	}  
+	  
+	public ArrayList buscar(File arquivo, String palavra, ArrayList lista) {  
+	    if (arquivo.isDirectory()) {  
+	        File[] subPastas = arquivo.listFiles();  
+	        for (int i = 0; i < subPastas.length; i++) {  
+	            lista = buscar(subPastas[i], palavra, lista);  
+	            if (arquivo.getName().equalsIgnoreCase(palavra)) lista.add(arquivo.getAbsolutePath());  
+	            else if (arquivo.getName().indexOf(palavra) > -1) lista.add(arquivo.getAbsolutePath());  
+	        }  
+	    }  
+	    else if (arquivo.getName().equalsIgnoreCase(palavra)) lista.add(arquivo.getAbsolutePath());  
+	    else if (arquivo.getName().indexOf(palavra) > -1) lista.add(arquivo.getAbsolutePath());  
+	    return lista;  
+	}  
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+}

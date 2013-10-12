@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+   
+<h:head> 
+<link href="imagens/logoPamin.jpg" /> 
+<title>PAMIN - Patrimônio Memória e Interatividade</title>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/mxn/mxn.js?(googlev3)"></script>
+<script type="text/javascript" src="lib/timeline-2.3.0.js" ></script>
+<script type="text/javascript" src="src/timemap.js" ></script>
+<script type="text/javascript" src="js/modal-window.js" ></script>
+ 
+<script type="text/javascript">
+// <![CDATA[ 
+            
+var tm;
+
+$(function() {
+	function Evento(start, end,title,lat,lon,tags,theme,local,horario,valor,imagem,idEvento){
+
+	    this.start = start;
+
+	    this.end = end;
+		
+		this.title = title;
+		
+		this.point = new point(lat,lon);
+		
+		this.options = new option(tags,theme,local,horario,valor,imagem,idEvento);
+
+	}
+
+	function point(lat,lon){
+		
+		this.lat = lat;
+		
+		this.lon = lon;
+	}
+
+	function option(tags,theme,local,horario,valor,imagem,idEvento){
+		
+		this.tags = tags;	
+		
+		this.theme = theme;
+		
+		this.local = local;
+		
+		this.horario = horario;
+		
+		this.valor = valor;
+		
+		this.imagem = imagem;
+		
+		this.idEvento = idEvento;
+	}
+	
+	//  Substituido e testado
+    var date = new Date();
+    var d = date.toString('yyyy-MM-dd');
+    
+	//Array que vai armazenar todos os eventos cadastrados no BD
+	eventos = new Array();	
+//]]>  Fechamendo do CDATA para que a tag forEach seja analizada em client-side para gerar o javascript         
+    
+	<c:forEach items="${eventoBean.listaInfoEventos}" var="eventoInfo" >
+	   eventos.push(new Evento('${eventoInfo.dteventoini}', '${eventoInfo.dteventofim}','${eventoInfo.nomeEvento}','${eventoInfo.latitude}','${eventoInfo.longitude}','${eventoInfo.nomeAtracao}','${eventoInfo.nomeAtracao}','${eventoInfo.local}','${eventoInfo.hora}','${eventoInfo.preco}',"infowindow/"+'${eventoInfo.nomeAtracao}'+".png", '${eventoInfo.idEvento}'));
+	</c:forEach>
+    
+//<![CDATA[ 
+    
+	tm = TimeMap.init({
+        mapId: "map",               // Id of map div element (required)
+        timelineId: "timeline",     // Id of timeline div element (required)
+        scrollTo: d, //Posiciona a timeline no dia atual
+        options: {
+            eventIconPath: "../imagen/",
+        	mapType: "basic",
+        	infoTemplate:'<div id="all">'+ /*Padrão da nossa infowindow*/
+            '<div style="font-size:18px;" id="titulo">{{title}}</div>'+
+            '<div id="info">'+
+          	'<div id="texto">'+
+            '<br><img src="infowindow/casa.gif" width="22" height="20" align="left" hspace="5px"/>{{local}}</br>'+
+            '<br><img src="infowindow/relogio.gif" width="22" height="20" align="left" hspace="5px"/>{{horario}}</br>'+
+            '<br><img src="infowindow/dinheiro.gif" width="22" height="18" align="left" hspace="5px"/>{{valor}}</br>'+
+          	'</div>'+
+            '<div id="imagem">'+
+            '<div class="greenBorders" style="display: table; height: 130px; width: 150px ; #position: relative; overflow: hidden;">'+
+            '<div style=" #position: absolute; #top: 50%;display: table-cell; vertical-align: middle;">'+
+            '<div class="greenBorder" style=" #position: relative; #top: -50%">'+
+            '<img src="{{imagem}}" width="144px" height="120px" border="2px"/>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '<div id="espaco">'+
+            '</div>'+
+            '<div id="button">'+
+            '<center><a href="detalha.jsf?id={{idEvento}}"><img src="imagens/saibamais.png" height="35" width="100%" /></h1></a></center>'+
+            '</div>'+
+         	'</div>'
+        },
+        datasets: [
+            {
+                id: "eventos",
+                title: "Pamin",
+                type: "basic",
+                options: {
+                    items: eventos //Atribuimos o array eventos para os itens da timemap
+                }
+            }
+        ],
+        bandIntervals: [
+        	Timeline.DateTime.DAY, 
+           	Timeline.DateTime.MONTH,
+            Timeline.DateTime.YEAR
+        ],
+        bandInfo : [
+       		{
+            	width: "59%",
+                intervalUnit: Timeline.DateTime.DAY,
+                intervalPixels: 200,
+                stimeZone: 8 //Afasta de cima da data
+            },
+ 			{
+            	width: "21%",
+                intervalUnit: Timeline.DateTime.MONTH,
+                intervalPixels: 100,
+                eventSource: null
+            },
+            {
+            	width: "20%",
+                intervalPixels: 100,
+                intervalUnit: Timeline.DateTime.YEAR,
+                eventSource: null
+            }
+            ]
+    }); 
+	// filter function for tags
+    var hasSelectedTag = function(item) {
+        // if no tag was selected, everything passes
+        return !window.selectedTag || (
+                // item has tags?
+                item.opts.tags &&
+                // tag found? (note - will work in IE; Timemap extends the Array prototype if necessary)
+                item.opts.tags.indexOf(window.selectedTag) >= 0
+            );
+    };
+
+    // add our new function to the map and timeline filters
+    tm.addFilter("map", hasSelectedTag); // hide map markers on fail
+    tm.addFilter("timeline", hasSelectedTag); // hide timeline events on fail
+
+
+    $("#titulo2").click(function () {
+	  $("#opcoes-categorias").slideToggle("slow");
+	});
+    
+     $('#esportesjogos').click(function() {
+         filtraEventos('Esportes');	
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+     
+     $('#infantis').click(function() {
+         filtraEventos('Infantil');	
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+
+
+      $('#literatura').click(function() {
+          filtraEventos('Literatura');	
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+
+      $('#musica').click(function() {
+                           filtraEventos('Musica');	
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+                           filtraEventos('Oficinas');	
+
+      $('#oficinaspalestras').click(function() {
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+
+      $('#videofotografia').click(function() {
+                           filtraEventos('Cinema');	
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+
+      $('#festivais').click(function() {
+          filtraEventos('Festivais');	
+			window.selectedTag = $("#tag_select").val();
+			// run filters
+			tm.filter('map');
+			tm.filter('timeline');
+	});
+
+     $('#outros').click(function() {
+                           filtraEventos('Outros');	
+         window.selectedTag = $("#tag_select").val();
+         // run filters
+         tm.filter('map');
+         tm.filter('timeline');
+     });
+
+     function filtraEventos(tag)
+     {
+       $('#tag_select').val(tag);
+     }
+});
+
+function mostra(n){		
+	if(document.getElementById("submenu"+n).style.display == "none"){
+		document.getElementById("submenu"+n).style.display="block";
+		document.getElementById("submenu"+n).setAttribute("style", "margin-left:-30px");
+	}else{
+		document.getElementById("submenu"+n).style.display="none";
+	}
+}	
+
+// ]]>
+</script>
+
+<style type="text/css">
+@import url("css/infowindow.css");
+@import url("css/timeline/timeline.css");
+@import url("css/timeline/timeline-bundle.css");
+@import url("css/layoutnovo.css");
+</style>
+
+</h:head>
+
+<h:body>
+	<table class="panel1">
+
+		<tr id="topo">
+			<td>
+				<center>
+					<h:panelGrid columns="3" style="margin-left:0px;">
+						<h:form>
+							<h:outputLink value="principal.jsf">
+								<h:graphicImage url="imagens/paminlogo.png" width="180"
+									height="60"></h:graphicImage>
+							</h:outputLink>
+						</h:form>
+						<h:form>
+							<p:menubar>
+								<p:menuitem rendered="#{usuarioBean.usuario != null}"
+									value="Cadastre um evento" url="cadastroEvento.jsf" />
+
+								<p:menuitem rendered="#{usuarioBean.usuario == null}"
+									value="Cadastre um evento" url="login.jsf" />
+
+								<p:submenu label="Sobre o PAMIN">
+									<p:menuitem value="O que é?" url="#" />
+									<p:menuitem value="Público Alvo" url="#" />
+								</p:submenu>
+
+								<p:submenu label="Como usar">
+									<p:menuitem value="Cadastrar eventos" url="#" />
+								</p:submenu>
+
+								<p:menuitem value="Fale Conosco" url="faleConosco.jsf" />
+
+							</p:menubar>
+							
+						</h:form>
+					    <h:form>
+				          <h:panelGrid rendered="#{usuarioBean.usuario != null}" style="margin-top:10px;margin-left:15px;" columns="2">
+			                <p:outputLabel style="color:white;">#{usuarioBean.usuario.nome}</p:outputLabel>
+			                <h:commandLink style="color:white;font-size:14px;" action="#{usuarioBean.logout()}">Sair</h:commandLink>
+			              </h:panelGrid>
+			            </h:form>
+					</h:panelGrid>
+				</center>
+				
+			</td>
+		</tr>
+
+		<tr>
+			<td id="map" style="position: relative;">
+			</td>
+			<td>
+			  <form name="seleciona">
+				 <var id="tag_select" value=""></var>
+			  </form>
+			</td>
+		</tr>
+
+		<tr>
+			<td id="timeline" />
+		</tr>
+
+		<tr>
+			<td id="rodape">
+				<center>
+					<h:panelGrid columns="12">
+
+						<h:graphicImage style="margin-bottom:0%;"
+							url="imagens/realizacao.png" width="10px" height="40px"></h:graphicImage>
+
+						<h:outputLink value="http://ufpb.br">
+							<h:graphicImage style="margin-bottom:0%;" url="imagens/ufpb.png"
+								width="30px" height="40px" />
+						</h:outputLink>
+						<h:outputLink value="http://lavid.ufpb.br">
+							<h:graphicImage style="margin-bottom:0%;" url="imagens/lavid.png"
+								width="40px" height="35px" />
+						</h:outputLink>
+
+						<h:graphicImage style="margin-bottom:0%;margin-left:15px;"
+							url="imagens/patrocinio.png" width="20px" height="40px"></h:graphicImage>
+
+						<h:outputLink value="http://portal.iphan.gov.br/">
+							<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+								url="imagens/Iphan.png" width="70px" height="40px" />
+						</h:outputLink>
+						<h:outputLink value="http://http://www.mec.gov.br/">
+							<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+								url="imagens/Mec.png" width="70px" height="40px" />
+						</h:outputLink>
+						<h:outputLink value="http://www.brasil.gov.br/">
+							<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+								url="imagens/BR.png" width="70px" height="40px" />
+						</h:outputLink>
+						<h:outputLink value="http://www.cnpq.br/">
+							<h:graphicImage style="margin-bottom:-8px;margin-left:10px;"
+								url="imagens/CNPqb.png" width="60px" height="35px" />
+						</h:outputLink>
+
+						<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+							url="imagens/parceiros.png" width="20px" height="40px"></h:graphicImage>
+
+						<h:outputLink value="http://www.fealegria.org.br/">
+							<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+								url="imagens/feealegria.png" width="30px" height="30px" />
+						</h:outputLink>
+						<h:outputLink value="http://www.joaopessoa.pb.gov.br/">
+							<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+								url="imagens/pmjp.png" width="40px" height="30px" />
+						</h:outputLink>
+						<h:outputLink
+							value="http://www.universidadedasquebradas.pacc.ufrj.br/">
+							<h:graphicImage style="margin-bottom:0%;margin-left:10px;"
+								url="imagens/quebradas.png" width="40px" height="25px" />
+						</h:outputLink>
+
+					</h:panelGrid>
+				</center>
+			</td>
+		</tr>
+
+	</table>
+
+    <div id="lateral" >	
+      <ul id="lista-categoria">
+		<li><span id="titulo2" style="font-size:15px;">Escolha uma categoria</span>
+			<ul id="opcoes-categorias" style="background-color:white; font-size:15px;">
+
+				<li id="artesplasticas"><a href="#"><div id="icone-artesplasticas"></div><h1>Artes Plásticas </h1></a>
+				</li>
+			
+				<li id="celebracoesreligiosas"><a href="#"><h1>Celebracões Religiosas</h1></a>
+				</li>
+			
+				<li id="cenicacircense"><a href="#"><h1>Cênicas e Circense </h1></a>
+				</li>
+			
+				<li id="danca"><a href="#"><h1>Danças</h1></a> 
+				</li>
+			
+				<li id="esportesjogos"><a href="#"><h1>Esportes e Jogos </h1></a>
+				</li>
+				
+				<li id="infantis"><a href="#"><h1>Infantis </h1></a>
+				</li>
+				
+				<li id="literatura"><a href="#"><h1>Literatura </h1></a>
+				</li>
+				
+				<li id="musica"><a href="#"><h1>Música </h1></a>
+				</li>
+				
+				<li id="oficinaspalestras"><a href="#"><h1>Oficinas e Palestras </h1></a>
+				</li>
+				
+				<li id="videofotografia"><a href="#"><h1>Vídeos e Fotografias </h1></a>
+				</li>
+				
+				<li id="festivais"><a href="#"><h1>Festivais e Multiartísticos </h1></a>
+				</li>
+				
+				<li id="outros"><a href="#"><h1>Outros </h1></a>
+				</li>
+			 </ul>
+		  </li>
+	   </ul>				
+   </div>
+</h:body>
+
+</html>

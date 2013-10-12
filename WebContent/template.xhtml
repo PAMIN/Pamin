@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:insert name="titulo" />
+	<style type="text/css">
+       @import url("css/layoutnovo.css");
+    </style>
+</h:head>
+
+<ui:insert name="metadata"/>
+
+<h:body>
+  <table class="panel1" >
+  
+  		<tr id="topo">
+  		  <td>
+  		     <center>
+					<h:panelGrid columns="3" style="margin-left:0px;">
+						<h:form>
+							<h:outputLink value="principal.jsf">
+								<h:graphicImage url="imagens/paminlogo.png" width="180"
+									height="60"></h:graphicImage>
+							</h:outputLink>
+						</h:form>
+						<h:form>
+							<p:menubar>
+								<p:menuitem rendered="#{usuarioBean.usuario != null}"
+									value="Cadastre um evento" url="cadastroEvento.jsf" />
+
+								<p:menuitem rendered="#{usuarioBean.usuario == null}"
+									value="Cadastre um evento" url="login.jsf" />
+
+								<p:submenu label="Sobre o PAMIN">
+									<p:menuitem value="O que é?" url="#" />
+									<p:menuitem value="Público Alvo" url="#" />
+								</p:submenu>
+
+								<p:submenu label="Como usar">
+									<p:menuitem value="Cadastrar eventos" url="#" />
+								</p:submenu>
+
+								<p:menuitem value="Fale Conosco" url="faleConosco.jsf" />
+
+							</p:menubar>
+							
+						</h:form>
+					    <h:form>
+				          <h:panelGrid rendered="#{usuarioBean.usuario != null}" style="margin-top:10px;margin-left:15px;" columns="2">
+			                <p:outputLabel style="color:white;">#{usuarioBean.usuario.nome}</p:outputLabel>
+			                <h:commandLink style="color:white;font-size:14px;" action="#{usuarioBean.logout()}">Sair</h:commandLink>
+			              </h:panelGrid>
+			            </h:form>
+					</h:panelGrid>
+				</center>
+  		     
+  		   </td>  
+  		</tr>
+  		
+  		<tr>
+  		  <td style="height:100%;">
+  		    <ui:insert name="conteudo"/>
+  		  </td>
+  		</tr>
+  	
+        
+        <tr>
+        <td id="rodape">
+         <center>
+          <h:panelGrid columns="12">
+            
+            <h:graphicImage style="margin-bottom:0%;" url="imagens/realizacao.png" width="10px" height="40px"></h:graphicImage>
+		    
+		    <h:outputLink value="http://ufpb.br"> 
+		       <h:graphicImage style="margin-bottom:0%;" url="imagens/ufpb.png" width="30px" height="40px"/>
+		    </h:outputLink>
+		    <h:outputLink value="http://lavid.ufpb.br"> 
+		       <h:graphicImage style="margin-bottom:0%;" url="imagens/lavid.png" width="40px" height="35px"/>
+		    </h:outputLink>
+	        
+	        <h:graphicImage style="margin-bottom:0%;margin-left:15px;" url="imagens/patrocinio.png" width="20px" height="40px"></h:graphicImage>
+	        
+	        <h:outputLink value="http://portal.iphan.gov.br/"> 
+		       <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/Iphan.png" width="70px" height="40px"/>
+		    </h:outputLink>
+		    <h:outputLink value="http://http://www.mec.gov.br/"> 
+		       <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/Mec.png" width="70px" height="40px"/>
+		    </h:outputLink>
+	        <h:outputLink value="http://www.brasil.gov.br/"> 
+		       <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/BR.png" width="70px" height="40px"/>
+		    </h:outputLink>
+		    <h:outputLink value="http://www.cnpq.br/"> 
+		       <h:graphicImage style="margin-bottom:-8px;margin-left:10px;" url="imagens/CNPqb.png" width="60px" height="35px"/>
+		    </h:outputLink>
+		    
+		    <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/parceiros.png" width="20px" height="40px"></h:graphicImage>
+	        
+	        <h:outputLink value="http://www.fealegria.org.br/"> 
+		       <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/feealegria.png" width="30px" height="30px"/>
+		    </h:outputLink>
+	        <h:outputLink value="http://www.joaopessoa.pb.gov.br/"> 
+		       <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/pmjp.png" width="40px" height="30px"/>
+		    </h:outputLink>
+		    <h:outputLink value="http://www.universidadedasquebradas.pacc.ufrj.br/"> 
+		       <h:graphicImage style="margin-bottom:0%;margin-left:10px;" url="imagens/quebradas.png" width="40px" height="25px"/>
+		    </h:outputLink>
+	      
+	      </h:panelGrid>
+	     </center>
+	    </td>
+	   </tr>
+	
+  </table>
+</h:body>
+	
+</html>

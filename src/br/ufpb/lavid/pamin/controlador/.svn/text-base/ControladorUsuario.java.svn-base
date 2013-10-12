@@ -1,0 +1,178 @@
+package br.ufpb.lavid.pamin.controladores;
+
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.persistence.NoResultException;
+
+import org.hibernate.Query;
+
+import br.ufpb.lavid.pamin.daoHibernate.HibernateUtil;
+import br.ufpb.lavid.pamin.daoHibernate.UsuarioDAOHibernate;
+import br.ufpb.lavid.pamin.modelo.Usuario;
+
+public class ControladorUsuario {
+
+	
+	public static Usuario realizarLogin(String login, String senha){
+	
+		try{
+			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			Query q = usuarioDAO.getSession().createQuery("SELECT u FROM Usuario u WHERE u.login=:login and u.senha=:senha");
+			q.setParameter("login", login);
+			q.setParameter("senha", hashPassword(senha));
+			System.out.println();
+			return (Usuario) q.uniqueResult();	
+		}catch (NoResultException NRE) {
+			return null;
+		}catch (Exception e) {
+			return null;
+		}
+	
+	}
+	
+	
+	public static Usuario cadastrarUsuario(Usuario usuario){
+		try{			
+			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			usuarioDAO.makePersistent(usuario);
+			return usuario;
+		}catch (Exception e) {
+			return null;
+		}
+	
+	}
+	
+	
+// seleciona o ultimo ID do usuario cadastrado
+//	public static int lastId(){
+//		try{
+//			
+//			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+//			Query q = usuarioDAO.getSession().createQuery("SELECT MAX(u.id.id) FROM Usuario u"); 			
+//			return ((Integer) q.uniqueResult()).intValue();	
+//			
+//		}catch (NoResultException NRE) {
+//			return 1;
+//		}catch (Exception e) {
+//			return 0;
+//		}
+//	
+//		
+//	}
+//	
+	
+	public static Usuario localizarUsuarioPeloLogin(String login){
+		try{
+			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			Query q = usuarioDAO.getSession().createQuery("SELECT u FROM Usuario u WHERE u.login=:login"); 			
+			q.setParameter("login", login);
+			return (Usuario) q.uniqueResult();	
+		}catch (NoResultException NRE) {
+			return null;
+		}catch (Exception e) {
+			return null;
+		}
+	
+	}
+	
+	
+	public static Usuario localizarUsuario(String id){
+		try{
+			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			Query q = usuarioDAO.getSession().createQuery("SELECT u FROM Usuario u WHERE u.id=:id"); 			
+			q.setParameter("id", Integer.parseInt(id));
+			return (Usuario) q.uniqueResult();	
+		}catch (NoResultException NRE) {
+			return null;
+		}catch (Exception e) {
+			return null;
+		}
+	
+	}
+
+	/*  @author Magno Rodrigues de Oliveira 
+	 *  Date: 23/10/2009
+	 *  Description: Função que pega senha inserida pelo usuario em formato 
+	 *  String e gera o Hash MD5 da mesma para guardar no banco.
+	 */
+	public static byte[] md5DaSenha(String senha){  
+		byte[] bsenha = senha.getBytes();
+		try {
+			MessageDigest digest = MessageDigest.getInstance("MD5");
+		
+			
+
+			digest.update(bsenha);
+			bsenha = digest.digest();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bsenha;
+	}
+	
+	public static String hashPassword(String password) {
+		String hashword = null;
+		try {
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
+		md5.update(password.getBytes());
+		BigInteger hash = new BigInteger(1, md5.digest());
+		hashword = hash.toString(16);
+		} catch (NoSuchAlgorithmException nsae) {
+		// ignore
+		}
+		return hashword;
+		}	
+
+//	public String HashToString(String hash){
+//		String senha = null;
+//		try{
+//			MessageDigest md5 = MessageDigest.getInstance("MD5");
+//			md5.
+//		}
+//		return senha;
+//	}
+
+/*	public static List<Usuario> usuariosCadastrados(Unidade unidade){
+		try{
+			
+			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			
+			Query q =  usuarioDAO.getSession().createQuery("SELECT u FROM Usuario u WHERE u.unidade.id ="+unidade.getId());
+			return (List<Usuario>) q.list();
+		
+		}catch (NoResultException nre) {
+			
+			return new ArrayList<Usuario>();			
+		}
+		catch (Exception e) {
+			return new ArrayList<Usuario>();
+		}
+	}*/
+
+/*
+	public static List<Usuario> getListaDeAlunos(Unidade unidade) {
+		try{
+			UsuarioDAOHibernate usuarioDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			Query q =  usuarioDAO.getSession().createQuery("SELECT u FROM Usuario u WHERE u.perfil.id = 2 and u.unidade.id ="+unidade.getId());
+			return (List<Usuario>) q.list();
+		}catch (NoResultException nre) {	
+			return new ArrayList<Usuario>();			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Usuario>();
+		}
+	}*/
+
+
+	public static void excluiUsuario(Usuario usuario) {
+		UsuarioDAOHibernate uDAO = new UsuarioDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+		uDAO.getSession().delete(usuario);
+	}  
+
+	
+}

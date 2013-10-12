@@ -1,0 +1,37 @@
+/* Menu Principal */
+
+ul.menu{ width:1000px; height:150px; position:absolute;}
+ul.menu li{ height:38px; margin-top:50px; float:left;}
+
+ul.menu li a{
+	height:15px;
+	float:left;
+	padding:11px 4px 11px 5px;
+	font-size:14px;
+	font-weight:bold;
+	font-family:"Trajan Pro",Times New Roman, Times, serif;
+	color:#cb410e;
+	border-left:1px solid #cb410e;
+	}
+ul.menu li a.logo{padding:0; border:none; margin-top:-50px;}
+ul.menu li a.livros{ border-right:none;}
+ul.menu li a.menuJogos{border-right:1px solid #cb410e;}
+ul.menu li a.menuRestrito{border-left:none; border-right:1px solid #cb410e; color:#2b32f2;}
+ul.menu li a:hover{color:#F90;}
+
+
+
+
+
+/*ul.menu li a.paginainicial{ background:url(../imagens/menu/bt_pagina_inicial.png) no-repeat; width:108px; }
+ul.menu li a.institucional{ background:url(../imagens/menu/bt_institucional.png) no-repeat; width:105px;}
+ul.menu li a.graduacao{ background:url(../imagens/menu/bt_graduacao.png) no-repeat; width:85px;}
+ul.menu li a.posgraduacao{ background:url(../imagens/menu/bt_posgraduacao.png) no-repeat; width:106px;}
+ul.menu li a.vestibular{ background:url(../imagens/menu/bt_vestibular.png) no-repeat; width:79px;}
+ul.menu li a.biblioteca{ background:url(../imagens/menu/bt_biblioteca.png) no-repeat; width:85px;}
+ul.menu li a.contato{ background:url(../imagens/menu/bt_contato.png) no-repeat; width:62px;}
+
+ul.menu li a{ text-indent:-5000px; display:block; height:29px; display:block; background-position:0 7px!important; }
+ul.menu li a:hover{ background-position:0 -35px!important}
+*/
+		

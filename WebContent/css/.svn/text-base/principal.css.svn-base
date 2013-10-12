@@ -1,0 +1,78 @@
+/* DEFINI��ES GERAIS */
+* {margin:0;padding:0;list-style:none;text-decoration:none;}
+strong{font-weight:bold;}
+em{font-style:italic;}
+html,address{font:normal normal 11px Arial, Helvetica, Verdana sans-serif;}
+html,body{text-align:center;}
+body{font-family:verdana;}
+html{height:100%;}
+img{border:none;}
+a{color:#8d8d8d;}
+a:hover{color:#666;}
+
+
+/* CLASSES DE USO GERAL*/
+.left{float:left}
+.right{float:right}
+.clear{clear:left;}
+.none{display:none}
+.block{display:block}
+.inline{display:inline}
+.indent{text-indent:-100000px}
+.absolute{position:absolute}
+.relative{position:relative}
+.hidden{overflow:hidden;}
+.center{text-align:center;}
+.tleft{text-align:left;}
+.tright{text-align:right;}
+.font10{font-size:10px;}
+.font12{font-size:12px;}
+.font13{font-size:13px;}
+.font14{font-size:14px;}
+	
+	/* CORES */
+	.red{color:red;}
+	.black{color:#000;}
+	.white{color:#fff;}
+	.blue{color:#0A90F1;}
+	.blue2{color:#015996;}
+	.grey{color:#616161;}
+	
+
+/*##################################################################################################*/
+/* ESTRUTURA */
+body{ background:url(../imagens/principal/mapa.jpg) no-repeat top; }
+#topo, #content, #rodape { width:888px; margin:auto; float:left;}
+
+/* TOPO */
+div#topo{
+	height:500px;
+	background:url(../imagens/principal/bg_container_topo.gif) bottom no-repeat;
+}
+div#topoBG{ 
+	width:100%;
+	height:500px;
+	background:url(../imagens/principal/bg_menu.gif) repeat-x;
+	background-position:0px 50px;
+}
+
+/* CONTENT */
+div#content{
+	min-height:900px;
+	background:url(../imagens/principal/bg_container.gif) repeat-y;
+}
+	
+/* RODAPE */
+div#rodape{	
+	min-height:140px;
+	background:url(../imagens/principal/bg_rodape.png) no-repeat top;
+	float:left;}	
+	
+/* COLUNAS DA INDEX */
+
+/*Not�cias Index*/
+
+
+/* ASSINATURAS */
+
+

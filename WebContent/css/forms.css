@@ -1,0 +1,40 @@
+/* COMENTARIOS */
+#commentsForm{ width:440px; margin-top:10px; margin-left:10px; margin-bottom:10px;float:left; text-align:left;}
+.comentarioForm, .comentarioForm_laranja {
+	border:none;
+	text-align:left;
+	padding:10px;
+	margin-left:5px;
+	}
+.comentarioForm {background:#b2d9fb;}
+.comentarioForm_laranja {background:#ffd95c;}
+
+.comentsNome {width:420px; margin-bottom:10px;}
+.comentsTxt {width:420px; height:70px; margin-bottom:10px;}
+
+/* ABA ENVIO DE ARQUIVOS */
+#aba_envio {
+	border:none;
+	text-align:left;
+	padding:10px 0 10px 0;
+}
+#aba_envio .dimensaoForm{ width:300px; margin:5px 0 10px 0; border:1px solid #71a2ce;}
+#aba_envio textArea{height:250px;}
+#aba_envio input.enviar{ width:162px; height:26px; border:none; background:url(../imagens/forms/bnt_upload.gif) no-repeat; color:#fff; padding:0;}
+
+/* LOGIN */
+#lay { z-index:100;}
+#login { width:888px; margin:auto;
+		border:none;
+	text-align:right;
+	padding:10px 0 10px 0;}
+#login input.enviar{ width:25px; height:21px; border:none; background:url(../imagens/forms/bnt_ok.gif) no-repeat; padding:0;}
+
+
+
+/*form *{font-family:Arial, Helvetica, sans-serif;font-size:11px;}
+fieldset.inepe_online{ border:none;}
+fieldset.inepe_online label{ width:100%; height:20px; margin-bottom:10px; text-align:right; display:block;}
+fieldset.inepe_online label input{ width:180px; height:14px; border:none; background:#202020 url(../imagens/forms/bg_input_login.jpg) no-repeat; padding:2px; color:#fff;}
+fieldset.inepe_online label input.enviar{ width:86px; height:21px; border:none; background:url(../imagens/forms/bg_input_login_enviar.jpg) no-repeat; color:#fff; padding:0;}
+span.opcoes_login{ display:block; width:130px; height:30px; text-align:right; position:absolute; top:153px; left:60px; font-size:10px;}*/

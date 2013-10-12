@@ -1,0 +1,64 @@
+package br.ufpb.lavid.pamin.controladores;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.NoResultException;
+
+import org.hibernate.Query;
+
+import br.ufpb.lavid.pamin.daoHibernate.HibernateUtil;
+import br.ufpb.lavid.pamin.daoHibernate.PerfilDAOHibernate;
+import br.ufpb.lavid.pamin.modelo.Perfil;
+
+public class ControladorPerfil {
+
+	
+	
+	public static List<Perfil> todosOsPerfis(){
+		
+		try{
+			
+			PerfilDAOHibernate perfilDAO = new PerfilDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			return perfilDAO.findAll();
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			return new ArrayList<Perfil>();
+		}
+	}
+
+	public static Perfil localizarPerfil(String tipo) {
+		try{
+			PerfilDAOHibernate perfilDAO = new PerfilDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			perfilDAO.getSession().beginTransaction();
+		//	Query q = perfilDAO.getSession().createQuery("SELECT p FROM Perfil p WHERE p.tipo=:tipo"); 			
+		//	q.setParameter("tipo",tipo);
+			//Perfil p = (Perfil) q.uniqueResult();
+			Perfil p = new Perfil();
+			
+			return p;
+		}catch (NoResultException NRE) {
+			return null;
+		}catch (Exception e) {
+			return null;
+			
+		}
+	
+	}
+	
+	public static void criarPerfil(Perfil perfil){
+		try{	
+			PerfilDAOHibernate perfilDAO = new PerfilDAOHibernate(HibernateUtil.getSessionFactory().getCurrentSession());
+			perfilDAO.getSession().beginTransaction();
+			perfilDAO.makePersistent(perfil);
+			perfilDAO.getSession().getTransaction().commit();		
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	
+	
+	
+}

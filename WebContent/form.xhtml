@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.org/ui">
+    
+  <h:dataTable value="#{eventos}" var="evento" >
+    <h:column >
+      <f:facet name="header"> Nome do evento </f:facet>
+      #{evento.nomeEvento}
+    </h:column>
+    <h:column >
+      <f:facet name="header"> Hora do evento </f:facet>
+      #{evento.hora}
+    </h:column>
+  </h:dataTable>  
+</ui:composition>    

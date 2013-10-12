@@ -1,0 +1,209 @@
+package br.ufpb.lavid.pamin.backingbean;
+
+import java.util.List;
+
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+
+import modelos.Evento;
+
+public class EventTable {
+	
+	private Object evento;
+	private EventoBean listaEventos = new EventoBean();
+	private DataModel modeloDanca = new ListDataModel(listaEventos.getEventosDanca());
+	private DataModel modeloArtes = new ListDataModel(listaEventos.getEventosArtes());
+	private DataModel modeloCenicas = new ListDataModel(listaEventos.getEventosCenicas());
+	private DataModel modeloReligiao = new ListDataModel(listaEventos.getEventosReligiao());
+	private DataModel modeloEsportes = new ListDataModel(listaEventos.getEventosEsportes());
+	private DataModel modeloInfantis = new ListDataModel(listaEventos.getEventosInfantis());
+	private DataModel modeloLiteratura = new ListDataModel(listaEventos.getEventosLiteratura());
+	private DataModel modeloMusicas = new ListDataModel(listaEventos.getEventosMusicas());
+	private DataModel modeloOficinas = new ListDataModel(listaEventos.getEventosOficinas());
+	private DataModel modeloVideos = new ListDataModel(listaEventos.getEventosVideos());
+	private DataModel modeloFestivais = new ListDataModel(listaEventos.getEventosFestivais());
+	private DataModel modeloOutros = new ListDataModel(listaEventos.getEventosOutros());
+	
+	
+	public EventoBean getListaEventos() {
+		return listaEventos;
+	}
+
+	public void setListaEventos(EventoBean listaEventos) {
+		this.listaEventos = listaEventos;
+	}
+
+	public DataModel getModeloDanca() {
+		return modeloDanca;
+	}
+
+	public void setModeloDanca(ListDataModel modelo) {
+		this.modeloDanca = modelo;
+	}
+	
+	public DataModel getModeloArtes() {
+		return modeloArtes;
+	}
+
+	public void setModeloArtes(DataModel modeloArtes) {
+		this.modeloArtes = modeloArtes;
+	}
+
+	public DataModel getModeloCenicas() {
+		return modeloCenicas;
+	}
+
+	public void setModeloCenicas(DataModel modeloCenicas) {
+		this.modeloCenicas = modeloCenicas;
+	}
+
+	public DataModel getModeloReligiao() {
+		return modeloReligiao;
+	}
+
+	public void setModeloReligiao(DataModel modeloReligiao) {
+		this.modeloReligiao = modeloReligiao;
+	}
+
+	public DataModel getModeloEsportes() {
+		return modeloEsportes;
+	}
+
+	public void setModeloEsportes(DataModel modeloEsportes) {
+		this.modeloEsportes = modeloEsportes;
+	}
+
+	public DataModel getModeloInfantis() {
+		return modeloInfantis;
+	}
+
+	public void setModeloInfantis(DataModel modeloInfantis) {
+		this.modeloInfantis = modeloInfantis;
+	}
+
+	public DataModel getModeloLiteratura() {
+		return modeloLiteratura;
+	}
+
+	public void setModeloLiteratura(DataModel modeloLiteratura) {
+		this.modeloLiteratura = modeloLiteratura;
+	}
+
+	public DataModel getModeloMusicas() {
+		return modeloMusicas;
+	}
+
+	public void setModeloMusicas(DataModel modeloMusicas) {
+		this.modeloMusicas = modeloMusicas;
+	}
+
+	public void setEvento(Object evento) {
+		this.evento = evento;
+	}
+
+	public void setModeloDanca(DataModel modeloDanca) {
+		this.modeloDanca = modeloDanca;
+	}
+	
+	public DataModel getModeloOficinas() {
+		return modeloOficinas;
+	}
+
+	public void setModeloOficinas(DataModel modeloOficinas) {
+		this.modeloOficinas = modeloOficinas;
+	}
+
+	public DataModel getModeloVideos() {
+		return modeloVideos;
+	}
+
+	public void setModeloVideos(DataModel modeloVideos) {
+		this.modeloVideos = modeloVideos;
+	}
+	
+
+	public DataModel getModeloFestivais() {
+		return modeloFestivais;
+	}
+
+	public void setModeloFestivais(DataModel modeloFestivais) {
+		this.modeloFestivais = modeloFestivais;
+	}
+
+	public DataModel getModeloOutros() {
+		return modeloOutros;
+	}
+
+	public void setModeloOutros(DataModel modeloOutros) {
+		this.modeloOutros = modeloOutros;
+	}
+
+	public String setDetalheDanca(){
+		evento = modeloDanca.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheArtes(){
+		evento = modeloArtes.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheCenicas(){
+		evento = modeloCenicas.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheReligiao(){
+		evento = modeloReligiao.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheEsportes(){
+		evento = modeloEsportes.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheInfantis(){
+		evento = modeloInfantis.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheLiteratura(){
+		evento = modeloLiteratura.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheMusicas(){
+		evento = modeloMusicas.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheOficinas(){
+		evento = modeloOficinas.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheVideos(){
+		evento = modeloVideos.getRowData();
+		return "select";
+	}
+
+	public String setDetalheFestivais(){
+		evento = modeloFestivais.getRowData();
+		return "select";
+	}
+	
+	public String setDetalheOutros(){
+		evento = modeloOutros.getRowData();
+		return "select";
+	}
+	
+	public Evento getEvento() {
+		return (Evento) evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+}

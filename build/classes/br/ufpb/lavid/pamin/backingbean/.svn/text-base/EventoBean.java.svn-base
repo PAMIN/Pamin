@@ -1,0 +1,155 @@
+package br.ufpb.lavid.pamin.backingbean;
+
+import java.util.*;
+
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+
+import controladores.ControladorEvento;
+
+import modelos.Evento;
+
+public class EventoBean {
+
+	private Evento evento = new Evento();
+	private List<Evento> eventosDanca;
+	private List<Evento> eventosCenicas;
+	private List<Evento> eventosArtes;
+	private List<Evento> eventosReligiao;
+	private List<Evento> eventosEsportes;
+	private List<Evento> eventosInfantis;
+	private List<Evento> eventosLiteratura;
+	private List<Evento> eventosMusicas;
+	private List<Evento> eventosOficinas;
+	private List<Evento> eventosVideos;
+	private List<Evento> eventosFestivais;
+	private List<Evento> eventosOutros;
+	private ControladorEvento eventoNovo = new ControladorEvento();
+	private String detalhe;
+
+	public List<Evento> getEventosDanca() {
+		this.eventosDanca = eventoNovo.danca();
+		return this.eventosDanca;
+	}
+
+	public void setEventosDanca(List<Evento> eventosDanca) {
+		this.eventosDanca = eventosDanca;
+	}
+
+	public List<Evento> getEventosArtes() {
+		this.eventosArtes = eventoNovo.artes();
+		return eventosArtes;
+	}
+
+	public void setEventosArtes(List<Evento> eventosArtes) {
+		this.eventosArtes = eventosArtes;
+	}
+
+	public List<Evento> getEventosCenicas() {
+		this.eventosCenicas = eventoNovo.teatro();
+
+		return eventosCenicas;
+	}
+
+	public void setEventosCenicas(List<Evento> eventosCenicas) {
+		this.eventosCenicas = eventosCenicas;
+	}
+
+	public List<Evento> getEventosReligiao() {
+		this.eventosReligiao = eventoNovo.celebracoes();
+		return eventosReligiao;
+	}
+
+	public void setEventosReligiao(List<Evento> eventosReligiao) {
+		this.eventosReligiao = eventosReligiao;
+	}
+
+	public List<Evento> getEventosEsportes() {
+		this.eventosEsportes = eventoNovo.esportes();
+		return eventosEsportes;
+	}
+
+	public void setEventosEsportes(List<Evento> eventosEsportes) {
+		this.eventosEsportes = eventosEsportes;
+	}
+
+	public List<Evento> getEventosInfantis() {
+		this.eventosInfantis = eventoNovo.infantil();
+		return eventosInfantis;
+	}
+
+	public void setEventosInfantis(List<Evento> eventosInfantis) {
+		this.eventosInfantis = eventosInfantis;
+	}
+
+	public List<Evento> getEventosLiteratura() {
+		this.eventosLiteratura = eventoNovo.literatura();
+		return eventosLiteratura;
+	}
+
+	public void setEventosLiteratura(List<Evento> eventosLiteratura) {
+		this.eventosLiteratura = eventosLiteratura;
+	}
+
+	public List<Evento> getEventosMusicas() {
+		this.eventosMusicas = eventoNovo.musica();
+		return eventosMusicas;
+	}
+
+	public void setEventosMusicas(List<Evento> eventosMusicas) {
+		this.eventosMusicas = eventosMusicas;
+	}
+
+	public List<Evento> getEventosOficinas() {
+		this.eventosOficinas = eventoNovo.oficinas();
+		return eventosOficinas;
+	}
+
+	public void setEventosOficinas(List<Evento> eventosOficinas) {
+		this.eventosOficinas = eventosOficinas;
+	}
+
+	public List<Evento> getEventosVideos() {
+		this.eventosVideos = eventoNovo.cinema();
+		return eventosVideos;
+	}
+
+	public void setEventosVideos(List<Evento> eventosVideos) {
+		this.eventosVideos = eventosVideos;
+	}
+
+	public List<Evento> getEventosFestivais() {
+		this.eventosFestivais = eventoNovo.festivais();
+		return eventosFestivais;
+	}
+
+	public void setEventosFestivais(List<Evento> eventosFestivais) {
+		this.eventosFestivais = eventosFestivais;
+	}
+
+	public List<Evento> getEventosOutros() {
+		this.eventosOutros = eventoNovo.outros();
+		return eventosOutros;
+	}
+
+	public void setEventosOutros(List<Evento> eventosOutros) {
+		this.eventosOutros = eventosOutros;
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	public String getDetalhe() {
+		return "detalheE";
+	}
+
+	public void setDetalhe(String detalhe) {
+		this.detalhe = detalhe;
+	}
+
+}

@@ -1,0 +1,226 @@
+@charset "utf-8";
+/* CSS Document */
+
+			
+body{
+	background-color: #FFFFFF; 
+	margin:0px;	
+	}
+	
+a{ 
+	color:#666666; 
+	text-decoration:none
+  }
+  
+a:hover{ 
+	color:#333333;
+	text-decoration:none;
+	}
+
+	
+
+div.global_superior{
+		   background-image: url(Imagens/bg_principal_topo4.jpg);
+		   background-repeat: repeat-x;
+		   margin:0px;
+		   height:335px;
+		   
+
+}
+
+div.global_inferior{ background-image:url(Imagens/bg-body.jpg);		   
+		   clear:both;
+		   background-repeat:repeat-x;
+		   margin:0px;
+		   float:bottom;		   		   
+}
+
+div.bg_glob_inferior{
+		  background-image:url(Imagens/bg_principal_down2.jpg);
+		  position:relative; 
+		  height:283px;
+		  margin:auto;
+		  
+
+}
+
+div.topo{ 
+		  margin:auto;
+		  padding-top:4px;
+		  height:46px;
+		  width:667px;
+		  }
+		  
+div.logo{ float:left; 
+		  width:261px;
+		  height:42px;
+	}
+	
+div.login_superior{ 
+		  float:inherit;
+		  height:21px;
+		  width:339px;
+		  }
+
+div.pesquisa{ 
+		  float:inherit;
+		  height:21px;
+		  width:339px;
+		  }
+	
+div.login{ background-image:url(Imagens/bg_login.png); 
+		  float:right;
+		  width:339px;
+		  height:42px;
+	}
+
+div.menu_horizontal{
+		  margin:auto;
+		  height:25px;
+		  width:667px; 
+		  }
+		  
+div.menu_horizontal_documentario{ 		  
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+  		  float:left;
+		  height:23px;
+		  width:90px; 
+		  }
+		  
+div.separador{ background-image:url(Imagens/rodape_divisao.jpg);
+		   height:16px;
+		   width:1px;
+		   float:right;}
+		  
+div.menu_horizontal_noticias{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+		  float:left;
+		  height:23px;
+		  width:70px;  
+		  }	
+		  	  
+div.menu_horizontal_musica{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+		  float:left;
+		  height:23px;
+		  width:70px;  
+		  }	
+		  	  
+div.menu_horizontal_video{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;
+		  float:left;
+		  height:23px;
+		  width:70px;  
+		  }
+		  		  
+div.menu_horizontal_series{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+		  float:left;
+		  height:23px;
+		  width:70px;  
+		  }
+		  
+		  		  
+div.menu_horizontal_outros{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+		  float:left;
+		  height:23px;
+		  width:70px;  
+		  }
+		  
+		  		  
+div.menu_horizontal_top50{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+		  float:left;
+		  height:23px;
+		  width:70px;  
+		  }
+		  
+		  		  
+div.menu_horizontal_upload{ 
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:22px;		  
+		  float:left;
+		  height:23px;
+		  width:70px; 
+		  }
+		  
+div.banner{ 
+		  background-image:url(Imagens/bg_player2.gif);
+		  background-repeat:no-repeat;
+		  padding-left:30px;
+		  padding-right:16px;
+		  margin:auto;
+		  height:260px;
+		  width:675px; 
+		  }
+		  
+div.player{ 
+		  background-color: #FF6600;
+		  float: left;		  
+		  height:256px;
+		  width:392px; 
+		  }
+		  
+div.watched_now{ 
+		  background-color: #000000;
+		  float:right;		  		  
+		  height:256px;
+		  width:237px; 
+		  }
+		  
+div.watched_titulo{
+		  float:inherit;
+		  height: 30px;
+		  width:237px;
+		  font-family:Verdana, Arial, Helvetica, sans-serif;
+		  font-size:10px;
+		  line-height:27px;		  	
+		  text-align:center;
+		  color:#FFFFFF;
+		  }
+		  
+div.watched_conteudo{
+		  float:inherit;
+		  background-color:#FFFFFF;
+		  width:237px;
+		  height:226px;
+		  }
+		  
+		  
+div.conteudo{   
+		  margin:auto;
+		  padding-top:15px;
+		  width:653px;
+		  height:500px;
+					   
+		  }		  
+  
+div.rodape{ background-image:url(Imagens/bg_rodape1.jpg);
+		  height:40px;
+		  }
+		  
+div.rodape_nome{ background-image:url(Imagens/rodape_nome1.png);
+		  margin:auto;
+		  height:40px;
+		  width:202px;
+		  }
+
+	
+
+

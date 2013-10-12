@@ -1,0 +1,89 @@
+package br.ufpb.lavid.pamin.dao;
+
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+
+public abstract class GenericDAO<T, ID extends Serializable>
+        implements IGenericDAO<T, ID> {
+		private Class<T> persistentClass;
+		
+		
+	    private EntityManager entityManager;
+	    
+		public GenericDAO() {
+			System.out.println();
+		}
+		
+		@SuppressWarnings("unchecked")
+		public GenericDAO(EntityManager em) {
+	        this.persistentClass = (Class<T>) ((ParameterizedType)getClass()
+	        .getGenericSuperclass()).getActualTypeArguments()[0];
+	        this.entityManager = em;
+	    }
+	    
+	    public void setTransaction(EntityManager entityManager) {
+	        this.entityManager = entityManager;
+	    }
+	    
+	    public EntityTransaction getTransaction() {
+	        return entityManager.getTransaction();
+	    }
+	    
+	    public Class<T> getPersistentClass() {
+	        return persistentClass;
+	    }
+	    
+	    public T findById(ID id) {
+	        T t = (T) entityManager.find(persistentClass, id);
+	        return t;
+	    }
+	    
+	    @SuppressWarnings("unchecked")
+	    public List<T> findAll() {
+	        Query q = entityManager.createQuery("select object(o) from "+persistentClass.getSimpleName()+" as o");
+	        return q.getResultList();
+	    }
+	    
+	    public T merge(T entity) {
+	        entity = entityManager.merge(entity);
+	        return entity;
+	    }
+	    
+	    public void insert(T entity) {
+	        entityManager.persist(entity);
+	    }
+	    
+	    public void delete(T entity) {
+	        entity = entityManager.merge(entity);
+	        entityManager.remove(entity);
+	    }
+	    
+	    public void refresh(T entity) {
+	    	entityManager.refresh(entity);
+	    }
+	    
+	    public void beginTransaction() {
+	    	entityManager.getTransaction().begin();   	
+	    }
+	    
+	    public void commit() {
+	    	entityManager.getTransaction().commit();
+	    }
+	    
+	    public void rollback() {
+	    	entityManager.getTransaction().rollback();
+	    }
+
+		public EntityManager getEntityManager() {
+			return entityManager;
+		}
+
+		public void setEntityManager(EntityManager entityManager) {
+			this.entityManager = entityManager;
+		}
+	}
